@@ -1,7 +1,16 @@
-import { ApiAiClient } from "api-ai-javascript";
 import { addChatLine } from '../redux/chat';
 import { INTENTS } from '../globals';
 
+//import { ApiAiClient } from "api-ai-javascript";
+class ApiAiClient {
+  textRequest() {
+    //return new Promise();
+  }
+
+  eventRequest() {
+    //return new Promise();
+  }
+}
 class DialogFlow {
   constructor(store, synthController) {
     this.responseCallbacks = {};
@@ -52,11 +61,11 @@ class DialogFlow {
 
   sendText = (text) => {
     this.store.dispatch(addChatLine(text, true));
-    this.client.textRequest(text).then(this.handleResponse).catch(this.handleError);
+    //this.client.textRequest(text).then(this.handleResponse).catch(this.handleError);
   }
 
   sendEvent = (eventName, options = {}) => {
-    this.client.eventRequest(eventName, options).then(this.handleResponse).catch(this.handleError);
+    //this.client.eventRequest(eventName, options).then(this.handleResponse).catch(this.handleError);
   }
 }
 

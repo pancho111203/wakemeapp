@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "api-ai-javascript": "2.0.0-beta.14",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
     "moment": "^2.20.1",
     "prop-types": "^15.6.0",
     "ramda": "^0.25.0",
@@ -12,8 +12,7 @@
     "react-redux": "^5.0.6",
     "react-scripts": "1.1.0",
     "react-sound": "^1.1.0",
-    "redux": "^3.7.2",
-    "eslint-plugin-jsx-a11y": "^6.0.3"
+    "redux": "^3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",

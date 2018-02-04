@@ -20,7 +20,7 @@ class App extends Component {
     this.synthController = new SynthController(this.props.store);
     this.dialogFlow = new DialogFlow(this.props.store, this.synthController);
     this.alarmManager = new AlarmManager(this.props.store, this.dialogFlow, this.synthController);
-
+    this.audioElement = null;
     this.recognitionController.onResult((res) => {
       const spokenText = this.recognitionController.getTranscriptOfResult(res);
       if (spokenText) {
@@ -32,6 +32,28 @@ class App extends Component {
 
   componentDidMount() {
     this.dialogFlow.sendEvent('WELCOME');
+  }
+
+  getPreloadedAudio = () => {
+    var req = new XMLHttpRequest();
+    req.open('GET', 'early-sunrise.mp3', true);
+    req.responseType = 'blob';
+    const _this = this;
+    req.onload = function () {
+      // Onload is triggered even on 404
+      // so we need to check the status code
+      if (this.status === 200) {
+        var audioBlob = this.response;
+        var audio = URL.createObjectURL(audioBlob); // IE10+
+
+        _this.audioElement.src = audio;
+      }
+    }
+    req.onerror = function () {
+      console.error('error downloading audio file');
+    }
+
+    req.send();
   }
 
   getChildContext() {
@@ -46,9 +68,13 @@ class App extends Component {
     const containerStyle = this.props.alarm.state === 'RINGING' ? { ...styles.container, ...styles.containerRinging } : styles.container;
     return (
       <div style={containerStyle}>
+        <audio ref={(el) => { this.audioElement = el; this.getPreloadedAudio(); }} loop preload="auto">
+          <source src="early-sunrise.mp3" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
         <div style={styles.topSection}>
           <Time />
-          <Alarm config={this.props.alarm} />
+          <Alarm audio={this.audioElement} config={this.props.alarm} />
         </div>
         <Chat />
         <Microphone />

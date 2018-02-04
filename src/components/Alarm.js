@@ -70,7 +70,7 @@ class Alarm extends React.Component {
     const shouldBeRinging = !this.state.speakingGapOn && this.props.config.state === 'RINGING' ? true : false;
     return (
       <div>
-        <Sound url="early-sunrise.mp3" playStatus={shouldBeRinging ? Sound.status.PLAYING : Sound.status.PAUSED} loop={true} />
+        <Sound url="early-sunrise.mp3" autoLoad={true} playStatus={shouldBeRinging ? Sound.status.PLAYING : Sound.status.PAUSED} loop={true} />
         {this.props.config.state === 'RINGING' ?
           <div style={{ ...styles.alarm, ...styles.ringingAlarm }}>
             Hora de levantarse!

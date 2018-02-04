@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "api-ai-javascript": "git+https://git@github.com/pancho111203/dialogflow-javascript-client.git",
     "moment": "^2.20.1",
     "prop-types": "^15.6.0",
     "ramda": "^0.25.0",
@@ -23,6 +23,7 @@
   "devDependencies": {
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-react": "^7.6.1"
+    "eslint-plugin-react": "^7.6.1",
+    "eslint-plugin-jsx-a11y": "^6.0.3"
   }
 }

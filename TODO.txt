@@ -6,24 +6,6 @@
   - tambien me permite que el soundmanager detecte cuando el synthcontroller este hablando, y baje el volumen del sonido automaticamente
 
 
-TODOS antes de presentacion
-  - scroll automatico al final del chat cuando se anada nuevo dialogo
-  - llamar a welcome automaticamente al empezar
-  
-  - interfaz basica
-    - fondo de color
-    - hora actual
-    - hora alarma
-    - boton microfono
-    - ultima frase dicha por siri
-  - interfaz alarma sonando
-    - boton de desactivacion
-    - cambio de color fondo
-
-
-
-
-
 IDEAS (para dsps de presentacion)
 
   - permitir programar una frase que me diga al levantarme (recordatorio)

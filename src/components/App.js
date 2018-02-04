@@ -10,8 +10,8 @@ import AlarmManager from '../logic/AlarmManager';
 import Chat from './Chat';
 import Alarm from './Alarm';
 import Microphone from './Microphone';
-import Time from './Time';
 import { colors } from '../theme';
+import Time from './Time';
 
 class App extends Component {
   constructor(props) {
@@ -30,6 +30,10 @@ class App extends Component {
     });
   }
 
+  componentDidMount() {
+    this.dialogFlow.sendEvent('WELCOME');
+  }
+
   getChildContext() {
     return {
       dialogFlow: this.dialogFlow,
@@ -39,11 +43,14 @@ class App extends Component {
   }
 
   render() {
+    const containerStyle = this.props.alarm.state === 'RINGING' ? { ...styles.container, ...styles.containerRinging } : styles.container;
     return (
-      <div style={styles.container}>
-        <Time />
+      <div style={containerStyle}>
+        <div style={styles.topSection}>
+          <Time />
+          <Alarm config={this.props.alarm} />
+        </div>
         <Chat />
-        <Alarm config={this.props.alarm} />
         <Microphone />
       </div>
     );
@@ -59,6 +66,16 @@ const styles = {
     width: '100vw',
     height: '100vh',
     backgroundColor: colors.primary
+  },
+  containerRinging: {
+    backgroundColor: colors.alarm
+  },
+  topSection: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }
 

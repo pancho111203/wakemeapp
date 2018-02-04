@@ -4,6 +4,21 @@ import { connect } from 'react-redux';
 import {colors} from '../theme';
 
 class Chat extends React.Component {
+  constructor(props) {
+    super(props);
+    this.messagesEnd = null;
+  }
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+  
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+  
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
   render() {
     return (
       <div style={styles.container}>
@@ -16,6 +31,9 @@ class Chat extends React.Component {
             </div>
           );
         })}
+        <div style={{ float:"left", clear: "both" }}
+             ref={(el) => { this.messagesEnd = el; }}>
+        </div>
       </div>
     );
   }

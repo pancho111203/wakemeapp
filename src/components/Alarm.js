@@ -1,7 +1,8 @@
 import React from 'react';
 import Sound from 'react-sound';
 import PropTypes from 'prop-types';
-
+import moment from 'moment';
+import { colors } from '../theme';
 const RING_INTERVAL = 5000;
 
 class Alarm extends React.Component {
@@ -60,13 +61,53 @@ class Alarm extends React.Component {
 
   render() {
     const config = this.props.config;
+    if (!config.nextRingTime) {
+      return (
+        <p style={styles.noAlarmActive}>No hay ninguna alarma activada</p>
+      )
+    }
+    const nextRingTime = config.nextRingTime;
     const shouldBeRinging = !this.state.speakingGapOn && this.props.config.state === 'RINGING' ? true : false;
     return (
       <div>
         <Sound url="early-sunrise.mp3" playStatus={shouldBeRinging ? Sound.status.PLAYING : Sound.status.PAUSED} loop={true} />
-        {config.nextRingTime}
+        {this.props.config.state === 'RINGING' ?
+          <div style={{ ...styles.alarm, ...styles.ringingAlarm }}>
+            Hora de levantarse!
+          </div> : 
+          <div style={{ ...styles.alarm, ...styles.waitingAlarm }}>
+            La alarma sonara a las {moment(nextRingTime).format('HH:mm:ss')}
+          </div>}
       </div>
     );
+  }
+}
+
+const styles = {
+  container: {
+
+  },
+  noAlarmActive: {
+    color: 'white',
+    textAlign: 'center'
+  },
+  alarm: {
+    height: 45,
+    padding: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    color: colors.primary,
+    backgroundColor: 'white',
+    textAlign: 'center'
+  },
+  ringingAlarm: {
+
+  },
+  waitingAlarm: {
+
   }
 }
 

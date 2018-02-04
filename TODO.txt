@@ -1,0 +1,32 @@
+// TODO
+
+
+- crear un soundmanager que se encarga de reproducir el sonido
+  - esto me permite evitar que varias alarmas suenen a la ves y se superpongan
+  - tambien me permite que el soundmanager detecte cuando el synthcontroller este hablando, y baje el volumen del sonido automaticamente
+
+
+TODOS antes de presentacion
+  - scroll automatico al final del chat cuando se anada nuevo dialogo
+  - llamar a welcome automaticamente al empezar
+  
+  - interfaz basica
+    - fondo de color
+    - hora actual
+    - hora alarma
+    - boton microfono
+    - ultima frase dicha por siri
+  - interfaz alarma sonando
+    - boton de desactivacion
+    - cambio de color fondo
+
+
+
+
+
+IDEAS (para dsps de presentacion)
+
+  - permitir programar una frase que me diga al levantarme (recordatorio)
+  - preguntar si quiere repetir la misma alarma al dia siguiente
+  - pasar a movil
+  - anadir fase desactivacion, dnd tienes que leer un texto escrito en  voz alta para desactivar (el txt deberia ser algo q interese al user)

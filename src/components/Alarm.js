@@ -3,6 +3,7 @@ import Sound from 'react-sound';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { colors } from '../theme';
+import { soundManager } from 'soundmanager2';
 
 const RING_INTERVAL = 5000;
 
@@ -10,9 +11,14 @@ class Alarm extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.ringInterval = null;
+
     this.state = {
       speakingGapOn: false
     };
+  }
+
+  componentWillMount() {
+    soundManager.setup({ignoreMobileRestrictions: true});
   }
 
   componentWillReceiveProps(newProps, newState) {
@@ -30,17 +36,12 @@ class Alarm extends React.Component {
       // should start listening for voice
       if (!this.state.speakingGapOn && newState.speakingGapOn) {
         this.context.recognitionController.resume();
-        newProps.audio.pause();
       }
 
       // should stop listening for voice
       if (this.state.speakingGapOn && !newState.speakingGapOn) {
         this.context.recognitionController.pause();
-        newProps.audio.play();
       }
-    } else {
-      newProps.audio.pause();
-      this.context.recognitionController.pause();
     }
   }
 
@@ -72,8 +73,10 @@ class Alarm extends React.Component {
       )
     }
     const nextRingTime = config.nextRingTime;
+    const shouldBeRinging = !this.state.speakingGapOn && this.props.config.state === 'RINGING' ? true : false;
     return (
       <div>
+        <Sound url="early-sunrise.mp3" autoLoad={true} playStatus={shouldBeRinging ? Sound.status.PLAYING : Sound.status.PAUSED} loop={true} />
         {this.props.config.state === 'RINGING' ?
           <div style={{ ...styles.alarm, ...styles.ringingAlarm }}>
             Hora de levantarse!

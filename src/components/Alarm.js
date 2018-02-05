@@ -3,8 +3,6 @@ import Sound from 'react-sound';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { colors } from '../theme';
-import { soundManager } from 'soundmanager2';
-
 const RING_INTERVAL = 5000;
 
 class Alarm extends React.Component {
@@ -15,10 +13,6 @@ class Alarm extends React.Component {
     this.state = {
       speakingGapOn: false
     };
-  }
-
-  componentWillMount() {
-    soundManager.setup({ignoreMobileRestrictions: true});
   }
 
   componentWillReceiveProps(newProps, newState) {
